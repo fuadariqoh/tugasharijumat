@@ -1,0 +1,137 @@
+
+<html>
+
+
+<script>
+let semuabarang=[
+['noodle',5,'2020',5000],
+['hoodie',5,'L',50000],
+['Headphone',5,'yes',200000],
+['Apel',5,'High',10000],
+]
+let cartbarang=[]
+let cartharga=[]
+let cartqty=[]
+let totalharga1=0
+
+function allbarang(){
+    output='Detail semua barang:\n'
+for(i=0;i<semuabarang.length;i++){
+    output+=(i+1)+'. Nama :'+semuabarang[i]+'\n'
+}return (output)
+}
+function totalharga(){
+    let totalharga1=0
+    for(i=0;i<cartharga.length;i++){
+        totalharga1+=cartharga[i]*cartqty[i]
+    }return totalharga1
+}
+
+
+function strukbelanja(){
+    let strukbelanja1='Struk belanja :\n=================================\n'
+                    for(var i=0;i<cartbarang.length;i++){
+                        strukbelanja1+=(i+1)+'. '+cartbarang[i]+' = '+cartqty[i]+' X Rp.'+cartharga[i]+' = '+
+                        (cartqty[i]*cartharga[i])+'\n'
+                    }
+                    strukbelanja1+='=========================================== +\n'
+                    strukbelanja1+='Total seluruhnya Rp. '+totalharga()
+                return strukbelanja1
+}
+
+do {
+let tanya=prompt('apa yang ingin anda lakukan?\n1. Menampilkan daftar produk\n2.menambah produk\n3.menghapus produk\n4.membeli produk\n5.keluar')
+if(tanya==1){
+        alert(allbarang())
+        }
+else if(tanya==2){
+            let tanyatambahproduk=prompt('Kategori apa yang ingin anda tambahkan?\n1.Cepat Saji\n2.Pakaian\n3.Elektronik\n4.Buah')
+            if(tanyatambahproduk==1){
+                let tanyacepatsaji=prompt('Masukkan nama produk')
+                let tanyacepatsaji1=prompt('Masukkan stok')
+                let tanyacepatsaji2=prompt('Expire date?')
+                let tanyacepatsaji3=prompt('Masukkan harga')
+                let hasilcepatsaji=[tanyacepatsaji,tanyacepatsaji1,tanyacepatsaji2,tanyacepatsaji3]
+                semuabarang.push(hasilcepatsaji) 
+                alert('Item berhasil ditambahkan')     
+            }
+            else if(tanyatambahproduk==2){
+                let tanyapakaian=prompt('masukkan nama produk')
+                let tanyapakaian1=prompt('masukkan stok ')
+                let tanyapakaian2=prompt('ukuran pakaian anda')
+                let tanyapakaian3=prompt('masukkan harga')
+                let hasilpakaian=[tanyapakaian,tanyapakaian1,tanyapakaian2,tanyapakaian3]
+                semuabarang.push(hasilpakaian)   
+                alert('Item berhasil ditambahkan')
+            }
+            else if(tanyatambahproduk==3){
+                let tanyaelektronik=prompt('masukkan nama produk')
+                let tanyaelektronik1=prompt('masukkan stok')
+                let tanyaelektronik2=prompt('masukkan status garansi')
+                let tanyaelektronik3=prompt('masukkan harga barang')
+                let hasilelektronik=[tanyaelektronik,tanyaelektronik1,tanyaelektronik2,tanyaelektronik3]
+                semuabarang.push(hasilelektronik)
+                alert('Item berhasil ditambahkan')
+            }
+            else{let tanyabuah=prompt('masukkan nama produk')
+            let tanyabuah1=prompt('masukkan jumlah stok')
+            let tanyabuah2=prompt('masukkan sugar level')
+            let tanyabuah3=prompt('masukkan harga barang')
+            hasilbuah=[tanyabuah,tanyabuah1,tanyabuah2,tanyabuah3]
+            semuabarang.push(hasilbuah)
+            alert('Item berhasil ditambahkan')
+            }
+        }
+        else if(tanya==3){
+            output1='List barang\n'
+            for(i=0;i<semuabarang.length;i++){
+                output1+=(i+1)+'. '+semuabarang[i][0]+'\n'
+            }let hapusbuah=parseInt(prompt(output1))-1
+            let konfirmasihapus=confirm('anda yakin ingin menghapus '+semuabarang[hapusbuah][0]+'?')
+               if(konfirmasihapus){
+                   semuabarang.splice(hapusbuah,1)
+                   alert('Item berhasil dihapuskan')
+               }
+               else{
+                   alert('anda tidak menghapus apa-apa :)')
+               }
+        }
+        else if(tanya==4){
+           do {
+            let pilihanbelanja=parseInt(prompt(allbarang()))-1
+            do {qty=prompt('mau beli'+' '+semuabarang[pilihanbelanja][0]+' berapa?'+'\nSTOK YANG TERSEDIA='+semuabarang[pilihanbelanja][1])
+                if(qty>semuabarang[pilihanbelanja][1]){
+                    alert('stok tidak cukup')
+                    
+                }else{
+                       alert('Anda berhasil membeli '+semuabarang[pilihanbelanja][0]+' sebanyak '+qty)
+                       semuabarang[pilihanbelanja][1]-=qty
+                      break
+                }
+
+            } while (true){
+               cartbarang.push(semuabarang[pilihanbelanja][0])
+               cartharga.push(semuabarang[pilihanbelanja][3])
+               cartqty.push(qty)
+            }
+            var konfirmasibelanja=confirm('mau belanja lagi tidak?')
+        } while (konfirmasibelanja){
+            alert(strukbelanja())
+           do {
+            let bayarsemua=parseInt(prompt('Masukkan uang belanja anda'))
+             if(bayarsemua>=totalharga()){
+                 alert('Kembalian anda sebanyak: '+(bayarsemua-totalharga()))
+                 alert('Terima kasih telah berbelanja di toko kami :)')
+                 break
+             }  
+             else{
+                 alert('uang anda tidak cukup')   
+             }var uang=true
+            } while (uang);
+        }
+        }
+var confirm1=confirm('apkah ingin kembali ke menu utama?')
+} while (confirm1);
+</script>
+
+</html>
